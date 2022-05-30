@@ -7,7 +7,7 @@
                <% @book.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
                 <% end %>
-            </ul>
+            </ul>: 
         <% end %>
       <h2>User info</h2>
       <%= render 'users/info', user: current_user %>

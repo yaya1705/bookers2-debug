@@ -5,8 +5,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     # @user = current_user不要
     @user = @book.user
-     @book_show = Book.new
+    @book_show = Book.new
     # form.html.erbに空のモデルを渡す。(21)
+    @book_comments = @book.book_comments
+    # each文に代入する@book(投稿).book_comment(複数の)
+    @book_comment = BookComment.new
+    # form_withに代入する空のモデル
   end
 
   def index
@@ -34,7 +38,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      redirect_to book_path(@book.id), notice: "You have updated book successfully."
+      redirect_to books_path, notice: "You have updated book successfully."
     else
       render :edit
     end
