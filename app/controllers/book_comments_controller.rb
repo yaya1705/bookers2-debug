@@ -2,7 +2,7 @@ class BookCommentsController < ApplicationController
     
    def create
        book = Book.find(params[:book_id])
-    # :book_idはrailsroutesの記述を参照
+    # :book_idはrails routesの記述を参照
      @book_comment = BookComment.new(book_comment_params)
      @book_comment.user_id = current_user.id
     # 誰が投稿したか user_id(カラム)

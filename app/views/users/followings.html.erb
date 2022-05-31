@@ -1,0 +1,32 @@
+
+      <h1>Follow Users</h1>
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th>  </th>
+            <th>  </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td>   
+                <%= image_tag user.get_profile_image(50,50) %>
+              </td>
+              <td>
+                <%= link_to user_path(user) do %>
+                  <%= user.name %>
+                <% end %>
+              </td>
+              <td><p>フォロー数：<%= user.followings.count %></p></td>
+              <td><p>フォロワー数：<%= user.followers.count %></p></td>
+              <td>
+                <%= link_to 'Show', books_path %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>

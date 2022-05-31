@@ -7,10 +7,26 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
+    <% users.each do |user| %>
       <tr>
         <td><%= image_tag user.get_profile_image(50,50) %></td>
         <td><%= user.name %></td>
+        
+        <td><p>フォロー数：<%= user.followings.count %></p></td>
+        <td><p>フォロワー数：<%= user.followers.count %></p></td>
+        <td>
+          <% if current_user.following?(user) %>
+          
+          <%=link_to user_relationships_path(user), method: :delete do %>
+            <button type="button" class="btn btn btn-danger">フォロー解除</button>
+          <% end %>
+          <% else %>
+          <%=link_to user_relationships_path(user), method: :post do %>
+            <button type="button" class="btn btn btn-primary">フォロー</button>
+          <% end %>
+          <!--https://www.youtube.com/watch?v=iAIRNEsA-7g　参照-->
+          <% end %>
+        </td>
         <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
       </tr>
     <% end %>
