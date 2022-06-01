@@ -19,7 +19,21 @@
 </table>
 　
 <div class='row'>
+  <% if user == current_user %>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
     <i class="fas fa-user-cog"></i>
+  <% end %>
+  <% else %>
+   <% if current_user.following?(user) %>
+          
+          <%=link_to user_relationships_path(user), method: :delete do %>
+            <button type="button" class="btn btn btn-danger">フォロー解除</button>
+          <% end %>
+          <% else %>
+          <%=link_to user_relationships_path(user), method: :post do %>
+            <button type="button" class="btn btn btn-primary">フォロー</button>
+          <% end %>
+          <!--https://www.youtube.com/watch?v=iAIRNEsA-7g　参照-->
+          <% end %>
   <% end %>
 </div>
