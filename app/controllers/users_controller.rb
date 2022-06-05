@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @user = current_user
     @users_id = User.where.not(id: current_user.id)
     # idがcurrent_user.id以外全て持ってくる
+    
   end
   
   def followings

@@ -26,17 +26,7 @@
               <% end %>
             </td>
             <td>
-              <% if @book.favorited?(current_user) %>
-             <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
-             <%= link_to book_favorites_path(@book.id), method: :delete do %>
-               <span style="color:red;">♥︎</span>
-            <% end %>
-           <% else %>
-           <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
-           <%= link_to book_favorites_path(@book.id), method: :post do %>
-             <span>♡︎</span>
-           <% end %>
-         <% end %>
+             <%= render "favorites/btn", book: @book %>
             </td>
             <td>
               <p>コメント数:<%= @book.book_comments.count %></p>
@@ -63,12 +53,7 @@
         </tbody>
       </table>
 
-        <div>
-           <%= form_with model: [@book, @book_comment] do |f| %>
-             <%= f.text_area :comment, placeholder: "コメントをここに",:size=>"80x5" %> <br>
-             <%= f.submit "送信" %>
-           <% end %>
-         </div>
+        <%= render "book_comments/form" %>
       <div>
       </div>
     </div>

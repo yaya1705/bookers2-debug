@@ -17,6 +17,7 @@ class BooksController < ApplicationController
     @book = Book.new
     @books = Book.all
     # @user = current_user不要
+    
   end
 
   def create

@@ -19,22 +19,21 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :following
   # フォローされる側からフォローしているユーザを取得する
   
+  
   def following?(user)
     followings.include?(user)
     # フォロワー=followings、(user) = 1人のユーザー、includde? = 含まれているか？
   end
   
-  def self.looks(search,word)
-    if search == "perfect_match"
-      @user = User.where("name LIKE?", "#{word}")
-    elsif search == "forward_match"
-      @user = User.where("name LIKE?", "#{word}%")
-    elsif search == "backward_match"
-      @user = User.where("name LIKE?", "%#{word}")  
-    elsif search == "partial_match"
-      @user = User.where("name LIKE?", "%#{word}%")
+  def self.search_for(content,method)
+    if method == "perfect"
+      User.where(name: content)
+    elsif method == "forward"
+      User.where("name LIKE?", content + "%")
+    elsif method == "backward"
+      @user = User.where("name LIKE?", "%" + content)
     else
-      @user = User.all
+      User.where("name LIKE ?", "%"+ content + "%")
     end
   end
   

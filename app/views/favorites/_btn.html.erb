@@ -1,0 +1,13 @@
+ <% if book.favorited?(current_user) %>
+             <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+             <%= link_to book_favorites_path(book.id), method: :delete do %>
+               <span style="color:red;">♥︎</span>
+               <%= book.favorites.count%>いいね
+            <% end %>
+           <% else %>
+           <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+           <%= link_to book_favorites_path(book.id), method: :post do %>
+             <span>♡︎</span>
+             <%= book.favorites.count %>いいね
+           <% end %>
+         <% end %>
