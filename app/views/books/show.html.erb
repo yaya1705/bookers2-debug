@@ -25,35 +25,16 @@
             <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%>
               <% end %>
             </td>
-            <td>
+            <td id="favorite_buttons_<%= @book.id %>">
              <%= render "favorites/btn", book: @book %>
             </td>
-            <td>
-              <p>コメント数:<%= @book.book_comments.count %></p>
+            <td id='count'>
+              <%= render "book_comments/count", book: @book %>
             </td>
         </tr>
       </table>
-      <table class="table">
-        <tbody>
-          <% @book_comments.each do |book_comment|%>
-          <tr>
-            <td>
-              <%= image_tag book_comment.user.get_profile_image(50,50)%>
-            </td>
-            <td>
-              <%= book_comment.comment %>
-            </td>
-            <td>
-                <% if book_comment.user_id == current_user.id %>
-                <%= link_to 'Destroy', book_path(@book), method: :delete, date: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%>
-                <% end %>
-            </td>
-          </tr>
-            <% end %>
-        </tbody>
-      </table>
-
-        <%= render "book_comments/form" %>
+        <div id="new-comment"><%= render "book_comments/index" %></div>
+        <div id="comments_area"><%= render "book_comments/form" %></div>
       <div>
       </div>
     </div>
